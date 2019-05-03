@@ -3,15 +3,9 @@ version: '3.5'
 services:
   cassandra:
     container_name: kong-database
-    build:
-      context: gateway/db
+    image: cassandra:3
     ports:
       - 9042:9042
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9042"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   migrations:
     links:

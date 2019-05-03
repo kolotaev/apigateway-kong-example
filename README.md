@@ -16,7 +16,7 @@ Commands
 $ make install
 ~~~~
 
-**note:** this command run the kong migrations
+**note:** this command runs the kong migrations
 
 **note:** the kong app wait 60 sec for cassandra db service
 
