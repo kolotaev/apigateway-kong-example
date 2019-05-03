@@ -36,6 +36,14 @@ $ make start
 $ make stop
 ~~~~
 
+* Registry a new service
+~~~~
+$ make add_resource NAME=app_a URL=http://app_a/
+$ make add_resource NAME=app_b URL=http://app_b/
+~~~~
+**note:** "app_a & app_b" is the service name in docker-compose for the applications
+
+
 * Registry a new application without oauth
 ~~~~
 $ make add_resource NAME=app_a HOST=app_a.dev UPSTREAM=http://app_a/

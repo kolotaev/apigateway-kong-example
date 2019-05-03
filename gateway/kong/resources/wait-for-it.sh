@@ -142,8 +142,8 @@ CHILD=${CHILD:-0}
 QUIET=${QUIET:-0}
 
 # check to see if timeout is from busybox?
-# check to see if timeout is from busybox?
-TIMEOUT_PATH=$(realpath $(which timeout))
+# todo - deal with busybox
+TIMEOUT_PATH=""
 if [[ $TIMEOUT_PATH =~ "busybox" ]]; then
         ISBUSY=1
         BUSYTIMEFLAG="-t"

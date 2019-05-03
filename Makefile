@@ -3,6 +3,7 @@
 API_HOST_8001_API = http://localhost:8001/api
 API_HOST_8001_APIS = http://localhost:8001/apis
 API_HOST_8001_CONSUMERS = http://localhost:8001/consumers
+API_HOST_8001_SERVICES = http://localhost:8001/services
 API_HOST_8000 = http://localhost:8000/
 
 install: ## Install the project for first time
@@ -66,6 +67,12 @@ start_app_b: ## Start the App B
 
 stop_app_b: ## Stop the App B
 	@docker-compose stop app_b
+
+add_service: ## Adding service
+	@curl -v -i -X POST \
+		--url $(API_HOST_8001_SERVICES) \
+		--data 'name=${NAME}' \
+		--data 'url=${URL}'
 
 add_resource: ## Adding resource
 	@curl -v -i -X POST \
