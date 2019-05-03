@@ -73,17 +73,17 @@ add_service: ## Adding service
 		--url $(API_HOST_8001_SERVICES) \
 		--data 'name=${NAME}' \
 		--data 'url=${URL}'
+	@curl -i -X POST \
+		--url $(API_HOST_8001_SERVICES)/${NAME}/routes \
+		--data 'hosts[]=${HOST}'
 
-add_resource: ## Adding resource
-	@curl -v -i -X POST \
-		--url $(API_HOST_8001_CONSUMERS) \
-		--data 'name=${NAME}' \
-		--data 'hosts=${HOST}' \
-		--data 'upstream_url=${UPSTREAM}'
+delete_service: ## Deleting service
+	@curl -v -i -X DELETE \
+		--url $(API_HOST_8001_SERVICES)/${NAME}
 
 enable_auth: ## Enable auth plugin
 	@curl -v -i -X POST \
-		--url $(API_HOST_8001_APIS)/${API_NAME}/plugins/ \
+		--url $(API_HOST_8001_SERVICES)/${NAME}/plugins/ \
 		--data 'name=key-auth'
 
 create_customer: ## Create consumers

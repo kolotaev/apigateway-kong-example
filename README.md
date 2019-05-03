@@ -1,11 +1,11 @@
-APIgateway example with Kong
+API-gateway example with Kong
 ============================
 
 Requirements for example
 ------------------------
 
-* Docker version 17.05.0-ce, build 89658be
-* docker-compose version 1.11.1, build 7c5d5e4
+* Docker version >= 18.09.2
+* docker-compose >= 1.23.2
 
 Commands
 --------
@@ -36,34 +36,13 @@ $ make start
 $ make stop
 ~~~~
 
-* Registry a new service
+* Register a new application (service) without oauth
 ~~~~
-$ make add_resource NAME=app_a URL=http://app_a/
-$ make add_resource NAME=app_b URL=http://app_b/
-~~~~
-**note:** "app_a & app_b" is the service name in docker-compose for the applications
-
-
-* Registry a new application without oauth
-~~~~
-$ make add_resource NAME=app_a HOST=app_a.dev UPSTREAM=http://app_a/
-$ make add_resource NAME=app_b HOST=app_b.dev UPSTREAM=http://app_b/
+$ make add_service NAME=app_a URL=http://app_a/ HOST=app_a.dev
+$ make add_service NAME=app_b URL=http://app_b/ HOST=app_b.dev
 ~~~~
 **note:** "app_a & app_b" is the service name in docker-compose for the applications
 
-~~~~
-// response
-
-HTTP/1.1 201 Created
-Date: Tue, 21 Nov 2017 17:37:24 GMT
-Content-Type: application/json; charset=utf-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-Access-Control-Allow-Origin: *
-Server: kong/0.11.1
-
-{"created_at":1511285843994,"strip_uri":true,"id":"8bbcbc3a-877a-49da-80e0-28949c2d043c","hosts":["app_a.dev"],"name":"app_a","http_if_terminated":false,"https_only":false,"retries":5,"upstream_url":"http:\/\/app_a\/","upstream_send_timeout":60000,"upstream_read_timeout":60000,"upstream_connect_timeout":60000,"preserve_host":false}
-~~~~
 
 * Test the kong forward using host header
 ~~~~
