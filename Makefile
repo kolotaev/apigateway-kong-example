@@ -3,6 +3,7 @@
 API_HOST_8001_CONSUMERS = http://localhost:8001/consumers
 API_HOST_8001_SERVICES = http://localhost:8001/services
 API_HOST_8000 = http://localhost:8000/
+KONG_UI = http://localhost:1337/
 
 install: ## Install the project for first time
 	@echo "creating the Cassandra DB"
@@ -77,6 +78,9 @@ start_app_b: ## Start the App B
 
 stop_app_b: ## Stop the App B
 	@docker-compose stop app_b
+
+ui: ## Open Kong UI in browser
+	@open $(KONG_UI)
 
 add_service: ## Adding service
 	@curl -v -i -X POST \

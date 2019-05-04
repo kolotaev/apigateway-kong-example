@@ -18,7 +18,7 @@ $ make install
 
 **note:** this command runs the kong migrations
 
-**note:** the kong app wait 60 sec for cassandra db service
+**note:** the kong app waits for cassandra db service
 
 * Uninstall the project
 ~~~~
@@ -29,11 +29,16 @@ $ make uninstall
 ~~~~
 $ make start
 ~~~~
-**note:** the kong app wait 60 sec for cassandra db service
+**note:** the kong app waits for cassandra db service
 
 * Stop all containers
 ~~~~
 $ make stop
+~~~~
+
+* Open Kong UI (Konga) in browser
+~~~~
+$ make ui
 ~~~~
 
 * Register a new application (service) without oauth

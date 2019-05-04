@@ -10,13 +10,12 @@ services:
   migrations:
     links:
       - cassandra
-    build:
-      context: gateway/kong
+    image: kong:1.1.2-alpine
     environment:
       KONG_DATABASE: cassandra
       KONG_PG_HOST: cassandra
       KONG_CASSANDRA_CONTACT_POINTS: cassandra
-    command: /tmp/wait-for-it.sh -t 60 cassandra:9042 -- kong migrations bootstrap
+    command: sh -c "while ! nc -z cassandra 9042; do sleep 5; echo wait; done && kong migrations bootstrap"
 
   kong:
     container_name: kong-app
@@ -49,14 +48,12 @@ services:
 
   app_a:
     container_name: app-a
-    build:
-      context: api/A
+    image: tutum/hello-world
     ports:
       - 8081:80
 
   app_b:
     container_name: app-b
-    build:
-      context: api/B
+    image: tutum/hello-world
     ports:
       - 8082:80
