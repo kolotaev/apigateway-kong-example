@@ -39,6 +39,14 @@ services:
       - 8001:8001
       - 8444:8444
 
+  konga:
+    container_name: konga-ui-app
+    image: pantsel/konga:latest
+    links:
+      - kong
+    ports:
+      - 1337:1337
+
   app_a:
     container_name: app-a
     build:

@@ -1,7 +1,5 @@
 .DEFAULT_GOAL := help
 
-API_HOST_8001_API = http://localhost:8001/api
-API_HOST_8001_APIS = http://localhost:8001/apis
 API_HOST_8001_CONSUMERS = http://localhost:8001/consumers
 API_HOST_8001_SERVICES = http://localhost:8001/services
 API_HOST_8000 = http://localhost:8000/
@@ -13,6 +11,8 @@ install: ## Install the project for first time
 	@make migrate
 	@echo "execute Kong app"
 	@make start_kong
+	@echo "execute Kong UI app"
+	@make start_konga
 	@echo "start the app a"
 	@make start_app_a
 	@echo "Starting app B"
@@ -26,6 +26,8 @@ start: ## Start all stopped containers
 	@make start_db
 	@echo "Starting kong services"
 	@make start_kong
+	@echo "Starting Kong UI"
+	@make start_konga
 	@echo "Starting app A"
 	@make start_app_a
 	@echo "Starting app B"
@@ -36,6 +38,8 @@ stop: ## Stop all containers
 	@make stop_db
 	@echo "Stop kong services"
 	@make stop_kong
+	@echo "Stop Kong UI"
+	@make stop_konga
 	@echo "Stop app A"
 	@make stop_app_a
 	@echo "Stop app B"
@@ -55,6 +59,12 @@ start_kong: ## Start the kong application
 
 stop_kong: ## Stop the kong application
 	@docker-compose stop kong
+
+start_konga: ## Start the kong UI application
+	@docker-compose up -d konga
+
+stop_konga: ## Stop the kong UI application
+	@docker-compose stop konga
 
 start_app_a: ## Start the App A
 	@docker-compose up -d app_a
@@ -102,7 +112,7 @@ test: ## Test resource
 		--header 'Host: ${HOST}'
 
 test_auth: ## Test using api key
-	@curl -i -X GET \
+	@curl -v -i -X GET \
 		--url $(API_HOST_8000) \
 		--header "Host: ${HOST}" \
 		--header "apikey: ${API_KEY}"
