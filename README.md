@@ -43,8 +43,8 @@ $ make ui
 
 * Register a new application (service) without oauth
 ~~~~
-$ make add_service NAME=app_a URL=http://app_a/ HOST=app_a.dev
-$ make add_service NAME=app_b URL=http://app_b/ HOST=app_b.dev
+$ make add_service NAME=app_a URL=http://app_a:8080 HOST=app_a.dev
+$ make add_service NAME=app_b URL=http://app_b:8080 HOST=app_b.dev
 ~~~~
 **note:** "app_a & app_b" is the service name in docker-compose for the applications
 
@@ -52,43 +52,6 @@ $ make add_service NAME=app_b URL=http://app_b/ HOST=app_b.dev
 * Test the kong forward using host header
 ~~~~
 $ make test HOST=app_a.dev
-
-// response:
-
-HTTP/1.1 200 OK
-Content-Type: text/html; charset=UTF-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: nginx/1.8.0
-Date: Tue, 21 Nov 2017 17:37:50 GMT
-X-Powered-By: PHP/5.6.14
-X-Kong-Upstream-Latency: 256
-X-Kong-Proxy-Latency: 155
-Via: kong/0.11.1
-
-<html>
-<head>
-	<title>Hello world!</title>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-	<style>
-	body {
-		background-color: white;
-		text-align: center;
-		padding: 50px;
-		font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-	}
-
-	#logo {
-		margin-bottom: 40px;
-	}
-	</style>
-</head>
-<body>
-	<img id="logo" src="logo.png" />
-	<h1>Hello world!</h1>
-	<h3>My hostname is 5017d131170f</h3>	</body>
-</html>
-
 ~~~~
 
 * Enable auth plugin
@@ -111,7 +74,7 @@ $ make test HOST=app_a.dev
 
 * Create a customer for authenticate API
 ~~~~
-$ make create_customer USER_NAME=dev API_KEY=dev
+$ make create_consumer USER_NAME=dev API_KEY=dev
 
 // responses:
 
@@ -122,42 +85,6 @@ $ make create_customer USER_NAME=dev API_KEY=dev
 * Test with api key
 ~~~~
 $ make test_auth HOST=app_a.dev API_KEY=dev
-
-// response:
-
-HTTP/1.1 200 OK
-Content-Type: text/html; charset=UTF-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: nginx/1.8.0
-Date: Fri, 24 Nov 2017 20:07:58 GMT
-X-Powered-By: PHP/5.6.14
-X-Kong-Upstream-Latency: 270
-X-Kong-Proxy-Latency: 208
-Via: kong/0.11.1
-
-<html>
-<head>
-	<title>Hello world!</title>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-	<style>
-	body {
-		background-color: white;
-		text-align: center;
-		padding: 50px;
-		font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-	}
-
-	#logo {
-		margin-bottom: 40px;
-	}
-	</style>
-</head>
-<body>
-	<img id="logo" src="logo.png" />
-	<h1>Hello world!</h1>
-	<h3>My hostname is 4bcfc5ecb1c4</h3>	</body>
-</html>
 ~~~~
 
 * For more commands

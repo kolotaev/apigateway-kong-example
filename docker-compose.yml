@@ -48,12 +48,12 @@ services:
 
   app_a:
     container_name: app-a
-    image: tutum/hello-world
+    image: jamesw/http-echo-server
     ports:
-      - 8081:80
+      - 8081:8080
 
   app_b:
     container_name: app-b
-    image: tutum/hello-world
+    image: jamesw/http-echo-server
     ports:
-      - 8082:80
+      - 8082:8080

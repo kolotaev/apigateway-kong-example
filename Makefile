@@ -83,7 +83,7 @@ ui: ## Open Kong UI in browser
 	@open $(KONG_UI)
 
 add_service: ## Adding service
-	@curl -v -i -X POST \
+	@curl -i -X POST \
 		--url $(API_HOST_8001_SERVICES) \
 		--data 'name=${NAME}' \
 		--data 'url=${URL}'
@@ -92,31 +92,31 @@ add_service: ## Adding service
 		--data 'hosts[]=${HOST}'
 
 delete_service: ## Deleting service
-	@curl -v -i -X DELETE \
+	@curl -i -X DELETE \
 		--url $(API_HOST_8001_SERVICES)/${NAME}
 
 enable_auth: ## Enable auth plugin
-	@curl -v -i -X POST \
+	@curl -i -X POST \
 		--url $(API_HOST_8001_SERVICES)/${NAME}/plugins/ \
 		--data 'name=key-auth'
 
-create_customer: ## Create consumers
+create_consumer: ## Create consumers
 	@echo Creating consumer
-	@curl -v -i -X POST \
+	@curl -i -X POST \
 		--url $(API_HOST_8001_CONSUMERS) \
 		--data "username=${USER_NAME}"
 	@echo Creating key-auth
-	@curl -v -i -X POST \
+	@curl -i -X POST \
 		--url $(API_HOST_8001_CONSUMERS)/${USER_NAME}/key-auth/ \
 		--data 'key=${API_KEY}'
 
 test: ## Test resource
-	@curl -v -i -X GET \
+	@curl -i -X GET \
 		--url $(API_HOST_8000) \
 		--header 'Host: ${HOST}'
 
 test_auth: ## Test using api key
-	@curl -v -i -X GET \
+	@curl -i -X GET \
 		--url $(API_HOST_8000) \
 		--header "Host: ${HOST}" \
 		--header "apikey: ${API_KEY}"
