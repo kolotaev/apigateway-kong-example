@@ -2,8 +2,8 @@
 
 API_HOST_8001_CONSUMERS = http://localhost:8001/consumers
 API_HOST_8001_SERVICES = http://localhost:8001/services
-API_HOST_8000 = http://localhost:8000/
-KONG_UI = http://localhost:1337/
+API_HOST_8000 = http://localhost:8000
+KONG_UI = http://localhost:1337
 
 install: ## Install the project for first time
 	@echo "creating DB for Kong"
