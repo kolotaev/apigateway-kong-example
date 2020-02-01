@@ -49,15 +49,15 @@ $ make ui
 
 * Register a new application (service) without oauth
 ~~~~
-$ make add_service NAME=app_a URL=http://app_a:8080 HOST=app_a.dev
-$ make add_service NAME=app_b URL=http://app_b:8080 HOST=app_b.dev
+$ make add_service NAME=app_a URL=http://app_a:8080 path=/a
+$ make add_service NAME=app_b URL=http://app_b:8080 path=/b
 ~~~~
 **note:** "app_a & app_b" is the service name in docker-compose for the applications
 
 
 * Test the kong forward using host header
 ~~~~
-$ make test HOST=app_a.dev
+$ make test path=/a
 ~~~~
 
 * Enable auth plugin
@@ -71,7 +71,7 @@ $ make enable_auth API_NAME=app_a
 
 **note:** an API with the active authentication plug-in will display this message in the response for the "make test" command
 ~~~~
-$ make test HOST=app_a.dev
+$ make test path=/a
 
 // response:
 
@@ -90,7 +90,7 @@ $ make create_consumer USER_NAME=dev API_KEY=dev
 
 * Test with api key
 ~~~~
-$ make test_auth HOST=app_a.dev API_KEY=dev
+$ make test_auth path=/a API_KEY=dev
 ~~~~
 
 * For more commands

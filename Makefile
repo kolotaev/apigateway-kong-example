@@ -91,7 +91,7 @@ add_service: ## Adding service
 		--data 'url=${URL}'
 	@curl -i -X POST \
 		--url $(API_HOST_8001_SERVICES)/${NAME}/routes \
-		--data 'hosts[]=${HOST}'
+		--data 'paths[]=${path}'
 
 delete_service: ## Deleting service
 	@curl -i -X DELETE \
@@ -99,7 +99,7 @@ delete_service: ## Deleting service
 
 enable_auth: ## Enable auth plugin
 	@curl -i -X POST \
-		--url $(API_HOST_8001_SERVICES)/${NAME}/plugins/ \
+		--url $(API_HOST_8001_SERVICES)/${API_NAME}/plugins/ \
 		--data 'name=key-auth'
 
 create_consumer: ## Create consumers
@@ -114,13 +114,11 @@ create_consumer: ## Create consumers
 
 test: ## Test resource
 	@curl -i -X GET \
-		--url $(API_HOST_8000) \
-		--header 'Host: ${HOST}'
+		--url $(API_HOST_8000)$(path)
 
 test_auth: ## Test using api key
 	@curl -i -X GET \
-		--url $(API_HOST_8000) \
-		--header "Host: ${HOST}" \
+		--url $(API_HOST_8000)$(path) \
 		--header "apikey: ${API_KEY}"
 
 help:
