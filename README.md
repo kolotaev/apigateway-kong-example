@@ -24,7 +24,7 @@ $ make install
 
 **note:** this command runs the kong migrations
 
-**note:** the kong app waits for cassandra db service
+**note:** the kong app waits for its database service
 
 * Uninstall the project
 ~~~~
@@ -35,7 +35,7 @@ $ make uninstall
 ~~~~
 $ make start
 ~~~~
-**note:** the kong app waits for cassandra db service
+**note:** the kong app waits for its database service
 
 * Stop all containers
 ~~~~
