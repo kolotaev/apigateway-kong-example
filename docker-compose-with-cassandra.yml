@@ -3,25 +3,19 @@ version: '3.5'
 services:
   database:
     container_name: kong-database
-    image: postgres:12-alpine
+    image: cassandra:3
     ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
+      - 9042:9042
 
   migrations:
     links:
       - database
     image: kong:latest
     environment:
-      KONG_DATABASE: postgres
+      KONG_DATABASE: cassandra
       KONG_PG_HOST: database
-      KONG_PG_USER: postgres
-      KONG_PG_DATABASE: postgres
-      KONG_PG_PASSWORD: root
-    command: sh -c "while ! nc -z database 5432; do sleep 5; echo wait; done && kong migrations bootstrap"
+      KONG_CASSANDRA_CONTACT_POINTS: cassandra
+    command: sh -c "while ! nc -z database 9042; do sleep 5; echo wait; done && kong migrations bootstrap"
 
   kong:
     container_name: kong-app
@@ -31,11 +25,9 @@ services:
       - app_b
     image: kong:latest
     environment:
-      KONG_DATABASE: postgres
-      KONG_PG_HOST: postgres
-      KONG_PG_USER: postgres
-      KONG_PG_DATABASE: postgres
-      KONG_PG_PASSWORD: root
+      KONG_DATABASE: cassandra
+      KONG_PG_HOST: post
+      KONG_CASSANDRA_CONTACT_POINTS: cassandra
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr

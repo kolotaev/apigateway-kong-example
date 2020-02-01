@@ -7,6 +7,12 @@ Requirements for example
 * Docker version >= 18.09.2
 * docker-compose >= 1.23.2
 
+Databases
+------------------------
+By default it runs Kong with Postgres database.
+If you want  to run Cassandra - replace contents of `docker-compose.yml` with `docker-compose-with-cassandra.yml`
+
+
 Commands
 --------
 

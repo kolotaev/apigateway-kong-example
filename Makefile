@@ -6,7 +6,7 @@ API_HOST_8000 = http://localhost:8000/
 KONG_UI = http://localhost:1337/
 
 install: ## Install the project for first time
-	@echo "creating the Cassandra DB"
+	@echo "creating DB for Kong"
 	@make start_db
 	@echo "execute database migrations"
 	@make migrate
@@ -47,10 +47,10 @@ stop: ## Stop all containers
 	@make stop_app_b
 
 start_db: ## Create the database
-	@docker-compose up -d cassandra
+	@docker-compose up -d database
 
 stop_db: ## Stop the database
-	@docker-compose stop cassandra
+	@docker-compose stop database
 
 migrate: ## run the db migrations
 	@docker-compose run migrations
