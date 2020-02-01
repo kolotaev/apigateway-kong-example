@@ -5,7 +5,7 @@ services:
     container_name: kong-database
     image: postgres:12-alpine
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -34,7 +34,7 @@ services:
     image: kong:latest
     environment:
       KONG_DATABASE: postgres
-      KONG_PG_HOST: postgres
+      KONG_PG_HOST: database
       KONG_PG_USER: postgres
       KONG_PG_DATABASE: postgres
       KONG_PG_PASSWORD: root

@@ -80,6 +80,8 @@ stop_app_b: ## Stop the App B
 	@docker-compose stop app_b
 
 ui: ## Open Kong UI in browser
+	@echo "Kong Admin server is: http://kong:8001"
+	@sleep 5
 	@open $(KONG_UI)
 
 add_service: ## Adding service
